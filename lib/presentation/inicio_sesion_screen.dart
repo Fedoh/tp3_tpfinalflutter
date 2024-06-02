@@ -14,13 +14,8 @@ class InicioSesion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.pink[700],
-        centerTitle: true,
-        title: const Text('Wine&Go'),
-      ),
-      body: const _InicioSesion(),
+    return const Scaffold(
+      body: _InicioSesion(),
     );
   }
 }
