@@ -472,16 +472,19 @@ class _MenuDrawer extends StatelessWidget {
             },
           ),
           InkWell(
-            child: ListTile(
-              title: const Text("Cerrar sesión"),
-              leading: Icon(Icons.logout, color: Colors.pink[700]),
-              onTap: ()  {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const InicioSesion()),
-                );
-              },
-            ),
-          ),
+              child: ListTile(
+                title: const Text("Cerrar sesión"),
+                 leading: Icon(Icons.logout, color: Colors.pink[700]),
+                 onTap: () async {
+                 final storage = FlutterSecureStorage();
+                  await storage.deleteAll();
+
+              Navigator.of(context).pushReplacement(
+               MaterialPageRoute(builder: (context) => const InicioSesion()),
+                 );
+               },
+             ),
+           ),
         ],
       ),
     );

@@ -171,16 +171,19 @@ class __InicioSesionState extends State<_InicioSesion> {
   }
 
   Future<void> _checkForSavedCredentials() async {
-    String? email = await storage.read(key: 'userEmail');
-    String? password = await storage.read(key: 'password');
-    if (email != null && password != null) {
-      setState(() {
-        _emailController.text = email;
-        _passwordController.text = password;
-        _rememberMe = true;
-      });
+  String? email = await storage.read(key: 'userEmail');
+  String? password = await storage.read(key: 'password');
+  if (email != null && password != null) {
+    setState(() {
+      _emailController.text = email;
+      _passwordController.text = password;
+      _rememberMe = true;
+    });
+    if (_rememberMe) {
+      _submit();
     }
   }
+}
 
   @override
   Widget build(BuildContext context) {
