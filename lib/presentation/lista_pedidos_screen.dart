@@ -53,7 +53,7 @@ class ListaPedidosScreen extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: ExpansionTile(
                 title: Text(
-                  'Pedido $formattedFecha $formattedHora',
+                  'Pedido del dia $formattedFecha $formattedHora',
                   style: const TextStyle(color: Colors.black),
                 ),
                 childrenPadding: const EdgeInsets.all(16.0),

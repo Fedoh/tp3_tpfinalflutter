@@ -112,7 +112,21 @@ class _CarritoDrawerState extends State<_CarritoDrawer> {
                 ElevatedButton(
                   onPressed: () async {
                     final direccion = await obtenerDireccion();
+                    if (direccion.isEmpty) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Por favor, proporciona una dirección.')),
+                      );
+                      return;
+                    }
+
                     final userId = await storage.read(key: 'userId');
+                    if (userId == null) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Error al obtener el ID de usuario.')),
+                      );
+                      return;
+                    }
+
                     final pedido = Pedido(
                       productos: widget.carrito.productos,
                       precioTotal: widget.carrito.getTotalPrice(),
@@ -146,7 +160,7 @@ class _CarritoDrawerState extends State<_CarritoDrawer> {
 
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ListaPedidosScreen(userId: userId!)),
+                        MaterialPageRoute(builder: (context) => ListaPedidosScreen(userId: userId)),
                       );
 
                     } catch (error) {
@@ -194,12 +208,12 @@ class _CarritoDrawerState extends State<_CarritoDrawer> {
     );
   }
 
-
   Future<String> obtenerDireccion() async {
-    final String? direccion = await storage.read(key: 'direccion');
-    return direccion ?? ''; 
+    final String? direccion = await storage.read(key: 'userAddress');
+    return direccion ?? '';
   }
 }
+
 
 
 Future<List<Producto>> fetchProductos() async {

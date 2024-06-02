@@ -10,7 +10,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class InicioSesion extends StatelessWidget {
   static const String name = 'InicioSesion';
-  const InicioSesion({Key? key});
+  const InicioSesion({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class InicioSesion extends StatelessWidget {
 }
 
 class _InicioSesion extends StatefulWidget {
-  const _InicioSesion({Key? key});
+  const _InicioSesion({Key? key}) : super(key: key);
 
   @override
   __InicioSesionState createState() => __InicioSesionState();
@@ -58,7 +58,7 @@ class __InicioSesionState extends State<_InicioSesion> {
     return hash.toString();
   }
 
-  void _submit() async {
+  Future<void> _submit() async {
     final email = _emailController.text.trim();
     final password = _passwordController.text.trim();
     final name = _nameController.text.trim();
@@ -166,19 +166,19 @@ class __InicioSesionState extends State<_InicioSesion> {
   }
 
   Future<void> _checkForSavedCredentials() async {
-  String? email = await storage.read(key: 'userEmail');
-  String? password = await storage.read(key: 'password');
-  if (email != null && password != null) {
-    setState(() {
-      _emailController.text = email;
-      _passwordController.text = password;
-      _rememberMe = true;
-    });
-    if (_rememberMe) {
-      _submit();
+    String? email = await storage.read(key: 'userEmail');
+    String? password = await storage.read(key: 'password');
+    if (email != null && password != null) {
+      setState(() {
+        _emailController.text = email;
+        _passwordController.text = password;
+        _rememberMe = true;
+      });
+      if (_rememberMe) {
+        _submit();
+      }
     }
   }
-}
 
   @override
   Widget build(BuildContext context) {

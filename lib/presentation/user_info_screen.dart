@@ -61,7 +61,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
               _buildInfoTile('Apellido', userData['apellido']),
               _buildAddressTile(userData['direccion'], context, widget.userId),
               _buildInfoTile('Correo electrónico', userData['email']),
-              _buildHistoryTile(context, widget.userId), // Agrega el tile para el historial de compras
+              _buildHistoryTile(context, widget.userId), 
             ],
           );
         },
@@ -106,19 +106,20 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   }
 
   Widget _buildHistoryTile(BuildContext context, String userId) {
-  return ListTile(
-    title: const Text(
-      'Historial de Compras',
-      style: TextStyle(fontWeight: FontWeight.bold),
-    ),
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ListaPedidosScreen(userId: userId)),
-      );
-    },
-  );
-}
+    return ListTile(
+      trailing : const Icon(Icons.arrow_forward), 
+      title: const Text(
+        'Historial de Compras',
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ListaPedidosScreen(userId: userId)),
+        );
+      },
+    );
+  }
 
   void _showChangeAddressDialog(BuildContext context, String userId) {
     String newAddress = '';
